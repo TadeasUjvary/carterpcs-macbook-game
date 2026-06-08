@@ -203,6 +203,57 @@ body {
   color: var(--text-primary);
 }
 
+/* Developer Profile Box */
+.dev-profile-box {
+  background: #151518;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.dev-profile-header {
+  background: #1c1c1f;
+  border-bottom: 1px solid var(--border-color);
+  padding: 8px 16px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.terminal-prompt {
+  color: var(--color-green);
+  font-weight: bold;
+}
+
+.dev-profile-body {
+  padding: 16px;
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+.dev-profile-body p {
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.dev-profile-body p:last-child {
+  margin-bottom: 0;
+}
+
+.dev-profile-body a {
+  color: var(--color-green);
+  text-decoration: underline;
+  font-family: var(--font-mono);
+  transition: all 0.15s ease;
+}
+
+.dev-profile-body a:hover {
+  background: var(--color-green);
+  color: #000;
+  text-decoration: none;
+}
+
 /* Rules Section */
 .rules-section {
   border-top: 1px dashed var(--border-color);
