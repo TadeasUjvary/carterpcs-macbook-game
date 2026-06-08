@@ -2,7 +2,7 @@
 
 An interactive arcade game and web landing page built specifically to petition **CarterPCs** (Carter Ryan Smith) for a MacBook upgrade. Because asking in TikTok comments gets swallowed by the algorithm.
 
-Live Demo: (Your Vercel URL will go here)
+Live Demo: [https://carterpcs-macbook-game.vercel.app](https://carterpcs-macbook-game.vercel.app)
 
 ## 🎮 Game Story & Concept
 
