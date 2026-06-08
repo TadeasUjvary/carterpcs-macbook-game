@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Quest for the MacBook | CarterPCs Edition</title>
+  <meta name="description" content="An interactive arcade game built specifically to request a MacBook from the legendary tech creator CarterPCs. Play, score 1000+ points, and unlock the ultimate pitch.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background Grid & Glowing Orbs -->
+  <div class="bg-effects" aria-hidden="true">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <main class="app-container">
+    
+    <!-- 1. INTRO / LANDING SCREEN -->
+    <section id="intro-screen" class="glass-panel active">
+      <header class="app-header">
+        <div class="logo-area">
+          <span class="logo-icon">💻</span>
+          <span class="logo-text">Quest For The MacBook</span>
+        </div>
+        <span class="badge red-glow">Target: @carterpcs</span>
+      </header>
+
+      <div class="hero-content">
+        <h1>Hey <span class="highlight-text">CarterPCs</span>, I built you a whole game.</h1>
+        <p class="subtitle">
+          Begging in the TikTok comments is too mainstream. Since I'm currently coding on a literal <strong>potato</strong>, I created this interactive experience to prove my dedication. 
+        </p>
+        
+        <div class="tech-specs-box">
+          <div class="spec-row">
+            <span class="spec-label">Current Dev Setup:</span>
+            <span class="spec-value text-red">Intel Pentium (2012) • 4GB RAM • Potato Battery</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Goal Setup:</span>
+            <span class="spec-value text-green">MacBook Pro (M3/M4) • Silky Smooth Coding • 120Hz</span>
+          </div>
+        </div>
+
+        <!-- Rules & Controls Grid -->
+        <div class="rules-grid">
+          <div class="rule-card">
+            <h3>How to Play</h3>
+            <p>Catch falling tech gear using your <strong>mouse, touch drag, or A/D / Arrow keys</strong> to move the potato catcher!</p>
+          </div>
+          <div class="legend-card">
+            <h3>Tech Catalog</h3>
+            <ul class="legend-list">
+              <li><span class="icon">💻</span> <strong>MacBook Pro</strong> <span class="points text-green">+100 pts</span></li>
+              <li><span class="icon">⌨️</span> <strong>Custom Keyboard</strong> <span class="points text-cyan">+50 pts (Speed Boost!)</span></li>
+              <li><span class="icon">🔌</span> <strong>Coiled Cable</strong> <span class="points text-cyan">+30 pts</span></li>
+              <li><span class="icon">💧</span> <strong>Water Drop</strong> <span class="points text-red">Slows Catcher & Resets Combo!</span></li>
+              <li><span class="icon">🤡</span> <strong>Imposter Carter</strong> <span class="points text-red">-100 pts (Ruins Catcher)</span></li>
+              <li><span class="icon">🔄</span> <strong>Windows Update</strong> <span class="points text-orange">Freezes Catcher for 1.5s!</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="action-bar">
+          <button id="start-game-btn" class="btn primary-btn pulse-glow">
+            <span class="btn-text">BOOT GAME SYSTEM</span>
+            <span class="btn-sub">Score 1,000 pts to claim MacBook Pitch</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. GAME PLAY SCREEN -->
+    <section id="game-screen" class="glass-panel">
+      <div class="game-header">
+        <div class="score-display">
+          <div class="score-label">SCORE</div>
+          <div id="game-score" class="score-value">0000</div>
+        </div>
+        <div class="combo-display">
+          <div class="combo-label">COMBO MULTIPLIER</div>
+          <div id="game-combo" class="combo-value text-cyan">1.0x</div>
+        </div>
+        <div class="target-display">
+          <div class="target-label">TARGET</div>
+          <div class="target-value text-green">1000 PTS</div>
+        </div>
+        <button id="mute-btn" class="btn icon-btn" aria-label="Toggle Sound">
+          <span id="mute-icon">🔊</span>
+        </button>
+      </div>
+
+      <!-- Canvas container with scanline overlays -->
+      <div class="canvas-container">
+        <canvas id="game-canvas" width="800" height="500"></canvas>
+        <div class="crt-overlay" aria-hidden="true"></div>
+        
+        <!-- Mobile Touch Controls HUD -->
+        <div class="mobile-controls-hud" aria-hidden="true">
+          <div class="hud-touch-area">⬅️ Drag Catcher to Move ➡️</div>
+        </div>
+      </div>
+
+      <!-- Real-time TikTok Ticker -->
+      <div class="ticker-container">
+        <div class="ticker-header">
+          <span class="live-dot"></span> LIVE TIKTOK COMMENT SIMULATION
+        </div>
+        <div id="ticker-messages" class="ticker-wrapper">
+          <div class="ticker-message">System: Connecting to TikTok comment servers...</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. CLAIM VICTORY DIALOG -->
+    <dialog id="victory-modal" class="glass-panel claim-modal">
+      <div class="modal-content">
+        <div class="confetti-cannon" aria-hidden="true">🎉 💻 🎉</div>
+        <h2 class="modal-title">🏆 YOU BEAT THE SYSTEM!</h2>
+        <p class="modal-subtitle">You scored over 1,000 points and proved you are worthy of an upgrade!</p>
+
+        <!-- Dynamic Certificate Frame -->
+        <div class="certificate-frame">
+          <div class="cert-header">
+            <div class="cert-seal">APPROVED FOR MACBOOK</div>
+            <h3>MACBOOK PETITION DECREE</h3>
+            <p>Verification Code: <span id="cert-code" class="text-cyan">MAC-POTATO-XXXX</span></p>
+          </div>
+          <div class="cert-body">
+            <p>This document certifies that a developer using a <strong>12-year-old potato laptop</strong> has completed the grueling <em>Quest for the MacBook</em>, scoring <strong id="cert-score">1000</strong> points.</p>
+            <p><strong>Verdict:</strong> CarterPCs, it is time to upgrade this potato.</p>
+          </div>
+        </div>
+
+        <!-- Copy and Share Actions -->
+        <div class="sharing-section">
+          <h3>Step 1: Copy the comment pitch</h3>
+          <div class="copy-box">
+            <textarea id="copy-text" readonly>Yo @carterpcs! I was coding on a literal potato, so I built a whole interactive game to ask you for a MacBook. I scored 1240 points! Check it out: [your-url-here] Do I get the MacBook? 💻🔥</textarea>
+            <button id="copy-btn" class="btn secondary-btn">
+              <span id="copy-btn-text">Copy Pitch 📋</span>
+            </button>
+          </div>
+
+          <div class="action-buttons">
+            <a id="tiktok-share-link" href="https://www.tiktok.com/@carterpcs" target="_blank" rel="noopener noreferrer" class="btn share-btn tiktok-btn">
+              Go to Carter's TikTok 🎵
+            </a>
+            <a id="twitter-share-link" href="https://twitter.com/intent/tweet" target="_blank" rel="noopener noreferrer" class="btn share-btn twitter-btn">
+              Tweet at Carter 🐦
+            </a>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button id="restart-game-btn" class="btn text-btn">Play Again 🔄</button>
+        </div>
+      </div>
+    </dialog>
+
+  </main>
+
+  <footer class="main-footer">
+    <p>Made with 💻 & 🥔 for @carterpcs. Shared under the "Give Me a MacBook" License.</p>
+  </footer>
+
+  <!-- JS Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>
