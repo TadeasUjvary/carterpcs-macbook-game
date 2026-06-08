@@ -12,12 +12,12 @@ const STATE_VICTORY = 'VICTORY';
 
 // Item catalog definition
 const ITEM_TYPES = {
-  MACBOOK: { emoji: '💻', points: 100, isGood: true, color: '#ffd700', speedMult: 0.9, size: 35 },
+  MACBOOK: { emoji: '💻', points: 100, isGood: true, color: '#ffd700', speedMult: 0.9, size: 34 },
   KEYBOARD: { emoji: '⌨️', points: 50, isGood: true, color: '#9d4edd', speedMult: 1.1, size: 30 },
-  CABLE: { emoji: '🔌', points: 30, isGood: true, color: '#00f2fe', speedMult: 1.0, size: 25 },
+  CABLE: { emoji: '🔌', points: 30, isGood: true, color: '#00f2fe', speedMult: 1.0, size: 24 },
   WATER: { emoji: '💧', points: -20, isGood: false, color: '#0055ff', speedMult: 1.2, size: 20 },
   IMPOSTER: { emoji: '🤡', points: -100, isGood: false, color: '#ff0055', speedMult: 1.3, size: 32 },
-  UPDATE: { emoji: '🔄', points: 0, isGood: false, color: '#ffb703', speedMult: 0.8, size: 30 }
+  UPDATE: { emoji: '🔄', points: 0, isGood: false, color: '#ff9500', speedMult: 0.8, size: 28 }
 };
 
 const TIKTOK_USERNAMES = [
@@ -28,51 +28,51 @@ const TIKTOK_USERNAMES = [
 
 const TIKTOK_COMMENTS = {
   start: [
-    "Bro is running a whole game for a laptop 💀",
-    "Carter is shaking right now",
-    "POV: begging Carter at 3 AM",
-    "Will Carter actually see this?",
-    "Nice CSS by the way!"
+    "Bro spent $10 in hosting fees to ask for a laptop 💀",
+    "Carter, look at this high-effort begging",
+    "POV: You could have gotten a part-time job instead of coding this",
+    "Will Carter actually watch a 3-minute video on this? Doubt it",
+    "Czechoslovakia coding on a potato in 2026"
   ],
   catchMacbook: [
-    "OMG is that an M3 Max?! 🤯",
-    "SHEEEESH, MacBook caught!",
-    "He's getting closer to the laptop",
-    "Wait, that's +100 points!"
+    "Catching M3 like he catches basic human needs",
+    "Wow, virtual pixels. Still coding on a toaster though",
+    "Clout multiplier increased",
+    "Carter, he caught the laptop. Send it!"
   ],
   catchGood: [
-    "Smooth catch!",
-    "RGB keyboard acquired +50",
-    "Nice cable management",
-    "Multiplier is going up!"
+    "Keyboard detected. Clack clack clack.",
+    "Caught cable. Hopefully it's not a fire hazard.",
+    "More digital junk caught +50",
+    "Score goes up, electric bill goes up too"
   ],
   hitWater: [
-    "Liquid damage warranty voided 💧",
-    "R.I.P. keyboard! 💀",
-    "Put the keyboard in rice, quick!",
-    "Combo reset... ouch."
+    "Liquid damage warranty voided. Typical.",
+    "RIP keyboard. Go dry it in a bag of rice.",
+    "Wet mechanical switches sound even worse now",
+    "Combo reset... cry about it"
   ],
   hitImposter: [
-    "Wait, that's not CarterPCs! 🤡",
-    "Fake Carter stole your points",
-    "Get baited, red flag!"
+    "Hit a fake Carter. Imagine falling for internet bots.",
+    "Stole your clout. Red flags everywhere.",
+    "Get baited, bro.",
+    "-100 points. Clout deficit."
   ],
   hitUpdate: [
-    "Windows is updating, typical 😂",
-    "Catcher frozen! Hit Ctrl+Alt+Del!",
-    "Restarting system... 1.5s freeze"
+    "Windows Update. Classic micro-soft torture.",
+    "Catcher frozen. Go grab a coffee during reboot.",
+    "BSOD freeze, should have used Linux 🐧"
   ],
   highCombo: [
-    "Bro is cooking! ⚡",
-    "Unstoppable keyboard warrior!",
-    "Czech developer is built different",
-    "Give this man a laptop already!"
+    "Combo streak. Go touch some grass.",
+    "Wasting electric bills like a pro.",
+    "Bro's keyboard is screaming right now",
+    "Czech developer trying not to code on a potato (impossible)"
   ],
   win: [
-    "HE ACTUALLY GOT 1000 POINTS!",
-    "Carter, buy him a MacBook!",
-    "Legendary dedication",
-    "We need to tag @carterpcs on TikTok now!"
+    "1000 points. Go put this on your resume under 'unemployed achievements'.",
+    "Carter, buy him a MacBook. We've suffered enough.",
+    "Time to copy the text and spam Carter's comments."
   ]
 };
 
@@ -102,17 +102,17 @@ class SoundManager {
     const gain = this.ctx.createGain();
     
     osc.type = 'triangle';
-    osc.frequency.setValueAtTime(523.25, this.ctx.currentTime); // C5
-    osc.frequency.exponentialRampToValueAtTime(880, this.ctx.currentTime + 0.1); // A5
+    osc.frequency.setValueAtTime(400, this.ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(800, this.ctx.currentTime + 0.08);
     
-    gain.gain.setValueAtTime(0.1, this.ctx.currentTime);
-    gain.gain.linearRampToValueAtTime(0.01, this.ctx.currentTime + 0.15);
+    gain.gain.setValueAtTime(0.08, this.ctx.currentTime);
+    gain.gain.linearRampToValueAtTime(0.01, this.ctx.currentTime + 0.1);
     
     osc.connect(gain);
     gain.connect(this.ctx.destination);
     
     osc.start();
-    osc.stop(this.ctx.currentTime + 0.15);
+    osc.stop(this.ctx.currentTime + 0.1);
   }
 
   playPowerUp() {
@@ -124,17 +124,17 @@ class SoundManager {
     const gain = this.ctx.createGain();
     
     osc.type = 'sine';
-    osc.frequency.setValueAtTime(300, now);
-    osc.frequency.exponentialRampToValueAtTime(1200, now + 0.3);
+    osc.frequency.setValueAtTime(250, now);
+    osc.frequency.linearRampToValueAtTime(900, now + 0.25);
     
-    gain.gain.setValueAtTime(0.15, now);
-    gain.gain.linearRampToValueAtTime(0.01, now + 0.35);
+    gain.gain.setValueAtTime(0.1, now);
+    gain.gain.linearRampToValueAtTime(0.01, now + 0.28);
     
     osc.connect(gain);
     gain.connect(this.ctx.destination);
     
     osc.start();
-    osc.stop(now + 0.35);
+    osc.stop(now + 0.28);
   }
 
   playHit() {
@@ -146,17 +146,17 @@ class SoundManager {
     const gain = this.ctx.createGain();
     
     osc.type = 'sawtooth';
-    osc.frequency.setValueAtTime(180, now);
-    osc.frequency.linearRampToValueAtTime(60, now + 0.2);
+    osc.frequency.setValueAtTime(120, now);
+    osc.frequency.linearRampToValueAtTime(40, now + 0.18);
     
-    gain.gain.setValueAtTime(0.2, now);
-    gain.gain.linearRampToValueAtTime(0.01, now + 0.25);
+    gain.gain.setValueAtTime(0.15, now);
+    gain.gain.linearRampToValueAtTime(0.01, now + 0.2);
     
     osc.connect(gain);
     gain.connect(this.ctx.destination);
     
     osc.start();
-    osc.stop(now + 0.25);
+    osc.stop(now + 0.2);
   }
 
   playFreeze() {
@@ -168,18 +168,17 @@ class SoundManager {
     const gain = this.ctx.createGain();
     
     osc.type = 'square';
-    osc.frequency.setValueAtTime(120, now);
-    osc.frequency.setValueAtTime(100, now + 0.1);
-    osc.frequency.setValueAtTime(80, now + 0.2);
+    osc.frequency.setValueAtTime(90, now);
+    osc.frequency.setValueAtTime(70, now + 0.15);
     
-    gain.gain.setValueAtTime(0.15, now);
-    gain.gain.linearRampToValueAtTime(0.01, now + 0.4);
+    gain.gain.setValueAtTime(0.1, now);
+    gain.gain.linearRampToValueAtTime(0.01, now + 0.35);
     
     osc.connect(gain);
     gain.connect(this.ctx.destination);
     
     osc.start();
-    osc.stop(now + 0.4);
+    osc.stop(now + 0.35);
   }
 
   playVictory() {
@@ -187,7 +186,7 @@ class SoundManager {
     this.init();
     
     const now = this.ctx.currentTime;
-    const notes = [261.63, 329.63, 392.00, 523.25, 659.25, 783.99, 1046.50]; // C4, E4, G4, C5, E5, G5, C6
+    const notes = [130.81, 164.81, 196.00, 261.63, 329.63, 392.00, 523.25]; // Low C arpeggio
     
     notes.forEach((freq, idx) => {
       const osc = this.ctx.createOscillator();
@@ -196,14 +195,14 @@ class SoundManager {
       osc.type = 'sine';
       osc.frequency.setValueAtTime(freq, now + idx * 0.08);
       
-      gain.gain.setValueAtTime(0.1, now + idx * 0.08);
-      gain.gain.linearRampToValueAtTime(0.01, now + idx * 0.08 + 0.3);
+      gain.gain.setValueAtTime(0.08, now + idx * 0.08);
+      gain.gain.linearRampToValueAtTime(0.01, now + idx * 0.08 + 0.25);
       
       osc.connect(gain);
       gain.connect(this.ctx.destination);
       
       osc.start(now + idx * 0.08);
-      osc.stop(now + idx * 0.08 + 0.35);
+      osc.stop(now + idx * 0.08 + 0.3);
     });
   }
 }
@@ -211,36 +210,32 @@ class SoundManager {
 const sound = new SoundManager();
 
 /* ==========================================================================
-   PARTICLE EFFECT SYSTEM
+   PARTICLE EFFECT SYSTEM (FLAT COLOR BLOCKS)
    ========================================================================== */
 class Particle {
   constructor(x, y, color) {
     this.x = x;
     this.y = y;
     this.color = color;
-    this.vx = (Math.random() - 0.5) * 8;
-    this.vy = (Math.random() - 0.5) * 8 - 3;
+    this.vx = (Math.random() - 0.5) * 6;
+    this.vy = (Math.random() - 0.5) * 6 - 2;
     this.alpha = 1.0;
-    this.size = Math.random() * 4 + 2;
-    this.decay = Math.random() * 0.03 + 0.02;
+    this.size = Math.random() * 3 + 1.5;
+    this.decay = Math.random() * 0.04 + 0.03;
   }
 
   update() {
     this.x += this.vx;
     this.y += this.vy;
-    this.vy += 0.1; // gravity
+    this.vy += 0.12; // gravity
     this.alpha -= this.decay;
   }
 
   draw(ctx) {
     ctx.save();
     ctx.globalAlpha = this.alpha;
-    ctx.shadowBlur = 10;
-    ctx.shadowColor = this.color;
     ctx.fillStyle = this.color;
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fill();
+    ctx.fillRect(this.x - this.size / 2, this.y - this.size / 2, this.size, this.size); // Flat square pixels
     ctx.restore();
   }
 }
@@ -251,7 +246,6 @@ class Particle {
 class FallingItem {
   constructor() {
     this.reset();
-    // Start offscreen initially
     this.y = -50;
   }
 
@@ -259,7 +253,7 @@ class FallingItem {
     this.x = Math.random() * (LOGIC_WIDTH - 80) + 40;
     this.y = -40;
     
-    // Choose item type with weighted probabilities
+    // Choose item type
     const rand = Math.random();
     if (rand < 0.20) {
       this.type = ITEM_TYPES.MACBOOK;
@@ -275,16 +269,12 @@ class FallingItem {
       this.type = ITEM_TYPES.UPDATE;
     }
 
-    // Dynamic speeds (faster over time)
     const baseSpeed = Math.random() * 2.5 + 2.5;
     this.speed = baseSpeed * this.type.speedMult;
-    
-    // Slight horizontal drift
     this.vx = (Math.random() - 0.5) * 1.5;
     
-    // Spin angle
     this.angle = 0;
-    this.spinSpeed = (Math.random() - 0.5) * 0.05;
+    this.spinSpeed = (Math.random() - 0.5) * 0.04;
   }
 
   update(speedMultiplier) {
@@ -292,7 +282,6 @@ class FallingItem {
     this.x += this.vx;
     this.angle += this.spinSpeed;
 
-    // Keep within bounds horizontally
     if (this.x < 20 || this.x > LOGIC_WIDTH - 20) {
       this.vx = -this.vx;
     }
@@ -303,16 +292,7 @@ class FallingItem {
     ctx.translate(this.x, this.y);
     ctx.rotate(this.angle);
 
-    // Glowing aura for important items
-    if (this.type === ITEM_TYPES.MACBOOK) {
-      ctx.shadowBlur = 15;
-      ctx.shadowColor = '#ffd700';
-    } else if (this.type.isGood) {
-      ctx.shadowBlur = 8;
-      ctx.shadowColor = this.type.color;
-    }
-
-    // Draw Emoji icon
+    // Flat rendering, no shadowBlur shadows
     ctx.font = `${this.type.size}px Arial`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
@@ -327,35 +307,31 @@ class FallingItem {
    ========================================================================== */
 class Catcher {
   constructor() {
-    this.width = 120;
-    this.height = 30;
+    this.width = 110;
+    this.height = 24;
     this.x = LOGIC_WIDTH / 2;
-    this.y = LOGIC_HEIGHT - 50;
-    this.speed = 10;
+    this.y = LOGIC_HEIGHT - 40;
+    this.speed = 9;
     
-    // Catcher status effects
     this.freezeTimer = 0;
     this.slowTimer = 0;
   }
 
   update(keys, targetX) {
-    // 1. Handle Status Timers
     if (this.freezeTimer > 0) {
       this.freezeTimer--;
-      return; // Catcher cannot move when frozen
+      return;
     }
 
     if (this.slowTimer > 0) {
       this.slowTimer--;
     }
 
-    // Calculate current speed
     let currentSpeed = this.speed;
     if (this.slowTimer > 0) {
-      currentSpeed = this.speed * 0.45; // 55% slower
+      currentSpeed = this.speed * 0.45;
     }
 
-    // 2. Keyboard Control
     if (keys['ArrowLeft'] || keys['a']) {
       this.x -= currentSpeed;
     }
@@ -363,13 +339,11 @@ class Catcher {
       this.x += currentSpeed;
     }
 
-    // 3. Mouse/Touch Control (smooth transition to targeted coordinates)
     if (targetX !== null) {
       const dx = targetX - this.x;
-      this.x += dx * 0.25; // Interpolate smooth tracking
+      this.x += dx * 0.25;
     }
 
-    // Keep catcher in canvas bounds
     const halfW = this.width / 2;
     if (this.x < halfW + 10) this.x = halfW + 10;
     if (this.x > LOGIC_WIDTH - halfW - 10) this.x = LOGIC_WIDTH - halfW - 10;
@@ -382,62 +356,54 @@ class Catcher {
     ctx.save();
     ctx.translate(this.x - this.width / 2, this.y);
 
-    // Glowing border effects based on status
-    ctx.shadowBlur = 15;
+    // Flat box borders, no radial glow
+    ctx.lineWidth = 1;
     if (isFrozen) {
-      ctx.shadowColor = '#0055ff'; // Frozen blue glow
-      ctx.fillStyle = '#1e3a8a';
-      ctx.strokeStyle = '#0055ff';
-    } else if (isSlowed) {
-      ctx.shadowColor = '#3b82f6';
       ctx.fillStyle = '#1e293b';
+      ctx.strokeStyle = '#3b82f6';
+    } else if (isSlowed) {
+      ctx.fillStyle = '#18181b';
       ctx.strokeStyle = '#60a5fa';
     } else {
-      ctx.shadowColor = '#00f2fe'; // Tech cyan glow
-      ctx.fillStyle = '#111827';
-      ctx.strokeStyle = '#00f2fe';
+      ctx.fillStyle = '#18181b';
+      ctx.strokeStyle = '#52525b';
     }
 
-    // Draw glowing chassis box (representing a custom keyboard casing)
-    ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.roundRect(0, 0, this.width, this.height, 8);
+    ctx.roundRect(0, 0, this.width, this.height, 4);
     ctx.fill();
     ctx.stroke();
 
-    // Draw decorative glowing keycaps inside catcher
-    const cols = 6;
-    const keyWidth = (this.width - 16) / cols;
-    const keyHeight = this.height - 12;
+    // Draw simple flat keycap blocks
+    const cols = 5;
+    const keyWidth = (this.width - 12) / cols;
+    const keyHeight = this.height - 8;
     
-    ctx.shadowBlur = 0; // disable heavy shadow for tiny keys
     for (let i = 0; i < cols; i++) {
       if (isFrozen) {
-        ctx.fillStyle = '#3b82f6';
+        ctx.fillStyle = '#2563eb';
+      } else if (isSlowed) {
+        ctx.fillStyle = '#1d4ed8';
       } else {
-        // RGB keycap color cycle effect
-        const hue = (Date.now() / 15 + i * 40) % 360;
-        ctx.fillStyle = `hsla(${hue}, 80%, 60%, 0.9)`;
+        ctx.fillStyle = '#27272a';
       }
-      ctx.beginPath();
-      ctx.roundRect(8 + i * keyWidth + 1, 6, keyWidth - 2, keyHeight, 3);
-      ctx.fill();
+      ctx.fillRect(6 + i * keyWidth + 1, 4, keyWidth - 2, keyHeight);
     }
 
-    // Draw the Catcher Name badge
+    // Label Badge
     ctx.fillStyle = '#ffffff';
     ctx.font = '10px Share Tech Mono';
     ctx.textAlign = 'center';
     
-    let label = 'CARTER CATCHER v1.0';
-    if (isFrozen) label = 'SYSTEM CRASHED 🔄';
-    else if (isSlowed) label = 'KEYBOARD DRYING 💧';
+    let label = 'POTATO CATCHER';
+    if (isFrozen) label = 'SYS ERROR 🔄';
+    else if (isSlowed) label = 'POTATO IS WET 💧';
     
-    ctx.fillText(label, this.width / 2, this.height - 6);
+    ctx.fillText(label, this.width / 2, this.height - 7);
 
-    // Draw the Potato on top if playing on a potato!
-    ctx.font = '22px Arial';
-    ctx.fillText('🥔', this.width / 2, -10);
+    // The Potato Emoji on top
+    ctx.font = '20px Arial';
+    ctx.fillText('🥔', this.width / 2, -8);
 
     ctx.restore();
   }
@@ -461,33 +427,29 @@ class Game {
     this.particles = [];
     
     this.keys = {};
-    this.targetX = null; // tracking mouse/touch logic X coord
+    this.targetX = null;
     
     this.gameSpeedMultiplier = 1.0;
-    this.spawnInterval = 75; // frames between spawns
+    this.spawnInterval = 75;
     this.frameCount = 0;
     
     this.screenShakeTime = 0;
     this.screenShakeIntensity = 0;
+    this.animationFrameId = null; // Stored to prevent concurrent runs
 
     this.setupListeners();
     this.setupTicker();
   }
 
   setupListeners() {
-    // Keyboard inputs
     window.addEventListener('keydown', (e) => {
       this.keys[e.key] = true;
-      if (e.key === ' ' && this.state === STATE_INTRO) {
-        this.start();
-      }
     });
     
     window.addEventListener('keyup', (e) => {
       this.keys[e.key] = false;
     });
 
-    // Handle Mouse / Touch tracking inside canvas
     const getCanvasMouseX = (clientX) => {
       const rect = this.canvas.getBoundingClientRect();
       const scaleX = LOGIC_WIDTH / rect.width;
@@ -501,37 +463,33 @@ class Game {
     };
 
     this.canvas.addEventListener('mousemove', (e) => handleMove(e.clientX));
-    
     this.canvas.addEventListener('touchmove', (e) => {
       if (e.touches && e.touches[0]) {
         handleMove(e.touches[0].clientX);
       }
-      e.preventDefault(); // prevent scrolling while playing
+      e.preventDefault();
     }, { passive: false });
 
-    // Cancel mouse target control when cursor leaves canvas
-    this.canvas.addEventListener('mouseleave', () => {
-      this.targetX = null;
-    });
+    this.canvas.addEventListener('mouseleave', () => { this.targetX = null; });
+    this.canvas.addEventListener('touchend', () => { this.targetX = null; });
 
-    this.canvas.addEventListener('touchend', () => {
-      this.targetX = null;
-    });
-
-    // Mute/Unmute audio button
+    // Sound toggle
     const muteBtn = document.getElementById('mute-btn');
-    const muteIcon = document.getElementById('mute-icon');
-    
     muteBtn.addEventListener('click', () => {
       sound.isMuted = !sound.isMuted;
-      muteIcon.textContent = sound.isMuted ? '🔇' : '🔊';
-      muteBtn.blur(); // remove keyboard focus outline
+      muteBtn.textContent = sound.isMuted ? '🔇 Muted' : '🔊 Sound';
+      muteBtn.blur();
+    });
+
+    // Exit Game button (Fixes menu navigation)
+    const exitBtn = document.getElementById('exit-game-btn');
+    exitBtn.addEventListener('click', () => {
+      this.resetToMenu();
     });
   }
 
   setupTicker() {
     this.tickerWrapper = document.getElementById('ticker-messages');
-    this.activeComments = [];
   }
 
   addTickerComment(category) {
@@ -541,12 +499,11 @@ class Game {
     const username = TIKTOK_USERNAMES[Math.floor(Math.random() * TIKTOK_USERNAMES.length)];
     const messageText = list[Math.floor(Math.random() * list.length)];
     
-    const commentHtml = `<div class="ticker-message"><span class="username">@${username}:</span>${messageText}</div>`;
+    const commentHtml = `<div class="ticker-log">&gt; <span class="username">@${username}</span>: ${messageText}</div>`;
     
     this.tickerWrapper.innerHTML = commentHtml + this.tickerWrapper.innerHTML;
     
-    // Prune ticker items to prevent memory bloat
-    if (this.tickerWrapper.children.length > 5) {
+    if (this.tickerWrapper.children.length > 3) {
       this.tickerWrapper.removeChild(this.tickerWrapper.lastChild);
     }
   }
@@ -557,6 +514,11 @@ class Game {
   }
 
   start() {
+    // Prevent multiple active loops
+    if (this.animationFrameId) {
+      cancelAnimationFrame(this.animationFrameId);
+    }
+
     this.state = STATE_PLAYING;
     this.score = 0;
     this.comboCount = 0;
@@ -570,26 +532,41 @@ class Game {
     
     sound.init();
     
-    // Switch screens in DOM
     document.getElementById('intro-screen').classList.remove('active');
     document.getElementById('game-screen').classList.add('active');
 
-    // Display initial ticker messages
     this.tickerWrapper.innerHTML = '';
     this.addTickerComment('start');
-    setTimeout(() => this.addTickerComment('start'), 1500);
 
-    // Trigger game loop
     this.loop();
+  }
+
+  resetToMenu() {
+    // 1. Cancel the active loop
+    if (this.animationFrameId) {
+      cancelAnimationFrame(this.animationFrameId);
+      this.animationFrameId = null;
+    }
+
+    // 2. Clear state variables
+    this.state = STATE_INTRO;
+    this.items = [];
+    this.particles = [];
+    this.score = 0;
+    this.comboCount = 0;
+    this.comboMultiplier = 1.0;
+
+    // 3. Toggle DOM visibility
+    document.getElementById('game-screen').classList.remove('active');
+    document.getElementById('intro-screen').classList.add('active');
   }
 
   spawnItems() {
     this.frameCount++;
     
-    // Progressively increase game speed and spawn rates
-    if (this.frameCount % 500 === 0) {
+    if (this.frameCount % 450 === 0) {
       this.gameSpeedMultiplier += 0.08;
-      this.spawnInterval = Math.max(38, this.spawnInterval - 4);
+      this.spawnInterval = Math.max(35, this.spawnInterval - 5);
     }
 
     if (this.frameCount % this.spawnInterval === 0) {
@@ -598,15 +575,13 @@ class Game {
   }
 
   update() {
-    // Apply screen shake decay
     if (this.screenShakeTime > 0) {
       this.screenShakeTime--;
     }
 
-    // Update Catcher
     this.catcher.update(this.keys, this.targetX);
 
-    // Update Particles
+    // Particles update
     for (let i = this.particles.length - 1; i >= 0; i--) {
       this.particles[i].update();
       if (this.particles[i].alpha <= 0) {
@@ -614,96 +589,82 @@ class Game {
       }
     }
 
-    // Update Falling Items and Check Collisions
+    // Falling items update & collision
     for (let i = this.items.length - 1; i >= 0; i--) {
       const item = this.items[i];
       item.update(this.gameSpeedMultiplier);
 
-      // Check boundary collision at bottom
       if (item.y > LOGIC_HEIGHT + 20) {
-        // Punish player if they let a MacBook hit the ground!
         if (item.type === ITEM_TYPES.MACBOOK) {
           this.comboCount = 0;
           this.comboMultiplier = 1.0;
           this.updateHUD();
-          this.addTickerComment('hitWater'); // general tragedy comment
+          this.addTickerComment('hitWater');
         }
         this.items.splice(i, 1);
         continue;
       }
 
-      // Check collision with the Catcher
       const catcherHalfW = this.catcher.width / 2;
       const collisionDistanceX = Math.abs(item.x - this.catcher.x);
       const collisionY = item.y + item.type.size / 2 >= this.catcher.y &&
                          item.y - item.type.size / 2 <= this.catcher.y + this.catcher.height;
 
-      if (collisionDistanceX < catcherHalfW + 10 && collisionY) {
-        // COLLISION DETECTED!
+      if (collisionDistanceX < catcherHalfW + 8 && collisionY) {
         this.handleCatch(item);
         this.items.splice(i, 1);
       }
     }
 
-    // Check Win/Victory Condition
     if (this.score >= 1000 && this.state !== STATE_VICTORY) {
       this.winGame();
     }
   }
 
   handleCatch(item) {
-    // 1. Spawn Particle Sparks
-    for (let p = 0; p < 12; p++) {
+    for (let p = 0; p < 8; p++) {
       this.particles.push(new Particle(item.x, item.y, item.type.color));
     }
 
-    // 2. Process Item Type Effects
     if (item.type.isGood) {
-      // Catching MacBook/Keyboard/Cable
       this.comboCount++;
-      // Increment combo multiplier every 4 catches, cap at 4x
       this.comboMultiplier = Math.min(4.0, 1.0 + Math.floor(this.comboCount / 4) * 0.5);
       
       const earned = Math.round(item.type.points * this.comboMultiplier);
       this.score += earned;
 
-      // Special item effects
       if (item.type === ITEM_TYPES.KEYBOARD) {
-        // Speed up catcher slow effect recovery, or act as speed boost
         this.catcher.slowTimer = 0;
         sound.playPowerUp();
         this.addTickerComment('catchGood');
       } else if (item.type === ITEM_TYPES.MACBOOK) {
         sound.playPowerUp();
-        this.triggerScreenShake(8, 15);
+        this.triggerScreenShake(6, 12);
         this.addTickerComment('catchMacbook');
       } else {
         sound.playScore();
       }
 
-      // High combo chatter
-      if (this.comboCount > 0 && this.comboCount % 8 === 0) {
+      if (this.comboCount > 0 && this.comboCount % 6 === 0) {
         this.addTickerComment('highCombo');
       }
 
     } else {
-      // Catching Bad Item (Water, Imposter, Update)
       this.comboCount = 0;
       this.comboMultiplier = 1.0;
       
-      // Inflict penalty
       this.score = Math.max(0, this.score + item.type.points);
-      this.triggerScreenShake(12, 20);
+      this.triggerScreenShake(10, 16);
 
       if (item.type === ITEM_TYPES.WATER) {
-        this.catcher.slowTimer = 200; // Slow down catcher for 200 frames
+        this.catcher.slowTimer = 180;
         sound.playHit();
         this.addTickerComment('hitWater');
       } else if (item.type === ITEM_TYPES.IMPOSTER) {
         sound.playHit();
         this.addTickerComment('hitImposter');
       } else if (item.type === ITEM_TYPES.UPDATE) {
-        this.catcher.freezeTimer = 90; // Freeze catcher for 90 frames (1.5s)
+        this.catcher.freezeTimer = 90;
         sound.playFreeze();
         this.addTickerComment('hitUpdate');
       }
@@ -720,19 +681,18 @@ class Game {
   draw() {
     this.ctx.save();
     
-    // Apply Screen Shake transformation if active
     if (this.screenShakeTime > 0) {
       const dx = (Math.random() - 0.5) * this.screenShakeIntensity;
       const dy = (Math.random() - 0.5) * this.screenShakeIntensity;
       this.ctx.translate(dx, dy);
     }
 
-    // Clear Canvas and Draw Background Grid
-    this.ctx.fillStyle = '#05070a';
+    // Flat solid canvas background
+    this.ctx.fillStyle = '#0a0a0c';
     this.ctx.fillRect(0, 0, LOGIC_WIDTH, LOGIC_HEIGHT);
 
-    // Canvas styling decoration (retro matrix vertical lines)
-    this.ctx.strokeStyle = 'rgba(0, 242, 254, 0.02)';
+    // Draw subtle grid lines (very faint)
+    this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.02)';
     this.ctx.lineWidth = 1;
     for (let x = 0; x < LOGIC_WIDTH; x += 40) {
       this.ctx.beginPath();
@@ -741,27 +701,24 @@ class Game {
       this.ctx.stroke();
     }
 
-    // Draw Entities
+    // Draw entities (without drop shadows)
     this.catcher.draw(this.ctx);
-    
     this.items.forEach(item => item.draw(this.ctx));
     this.particles.forEach(p => p.draw(this.ctx));
 
-    // Custom Canvas Overlays (BSOD Freeze text screen overlay)
+    // Freeze overlay
     if (this.catcher.freezeTimer > 0) {
-      this.ctx.fillStyle = 'rgba(0, 85, 255, 0.12)';
+      this.ctx.fillStyle = 'rgba(255, 149, 0, 0.12)'; // Orange BSOD tint
       this.ctx.fillRect(0, 0, LOGIC_WIDTH, LOGIC_HEIGHT);
       
       this.ctx.fillStyle = '#ffffff';
-      this.ctx.font = '24px Share Tech Mono';
+      this.ctx.font = '22px Share Tech Mono';
       this.ctx.textAlign = 'center';
-      this.ctx.shadowBlur = 10;
-      this.ctx.shadowColor = '#0055ff';
-      this.ctx.fillText('🔄 SYSTEM RUNNING WINDOWS UPDATE...', LOGIC_WIDTH / 2, LOGIC_HEIGHT / 2 - 20);
+      this.ctx.fillText('🔄 WINDOWS IS FORCING AN UPDATE...', LOGIC_WIDTH / 2, LOGIC_HEIGHT / 2 - 15);
       
-      this.ctx.font = '14px Share Tech Mono';
-      this.ctx.fillStyle = '#94a3b8';
-      this.ctx.fillText(`Catcher lock duration: ${(this.catcher.freezeTimer / 60).toFixed(1)}s`, LOGIC_WIDTH / 2, LOGIC_HEIGHT / 2 + 10);
+      this.ctx.font = '13px Share Tech Mono';
+      this.ctx.fillStyle = '#a1a1aa';
+      this.ctx.fillText(`Catcher locked: ${(this.catcher.freezeTimer / 60).toFixed(1)}s`, LOGIC_WIDTH / 2, LOGIC_HEIGHT / 2 + 15);
     }
 
     this.ctx.restore();
@@ -774,7 +731,7 @@ class Game {
     this.draw();
     this.spawnItems();
 
-    requestAnimationFrame(() => this.loop());
+    this.animationFrameId = requestAnimationFrame(() => this.loop());
   }
 
   winGame() {
@@ -782,29 +739,25 @@ class Game {
     sound.playVictory();
     this.addTickerComment('win');
 
-    // Generate Verification Certificate details
     const certCodeVal = `MCB-${Math.floor(Math.random() * 900 + 100)}-${TIKTOK_USERNAMES[Math.floor(Math.random() * TIKTOK_USERNAMES.length)].toUpperCase().substring(0, 4)}`;
     document.getElementById('cert-code').textContent = certCodeVal;
     document.getElementById('cert-score').textContent = this.score;
 
-    // Craft custom petition clipboard text
-    const shareUrl = window.location.href.split('?')[0]; // strip query parameters
+    const shareUrl = window.location.href.split('?')[0];
     const copyTextarea = document.getElementById('copy-text');
-    copyTextarea.value = `Yo @carterpcs! I was coding on a literal potato, so I built a whole interactive game to prove my dedication. I scored ${this.score} points! Check it out: ${shareUrl} Do I get a MacBook? 💻🔥 (Verification: ${certCodeVal})`;
+    copyTextarea.value = `Hey @carterpcs! I spent 6 hours writing a custom game on my potato to petition you for a MacBook. I scored ${this.score} pts! Play it here: ${shareUrl} Do I get an upgrade? 💻 (Verification: ${certCodeVal})`;
 
-    // Configure Twitter Web intent link
     const tweetLink = document.getElementById('twitter-share-link');
-    const tweetText = encodeURIComponent(`Yo @carterpcs! I built a custom game because I'm coding on a potato. Can I get a MacBook? 💻🔥\nPlay it here: ${shareUrl}`);
+    const tweetText = encodeURIComponent(`Yo @carterpcs! I built a custom game on a potato because I need a MacBook. Play here: ${shareUrl}`);
     tweetLink.href = `https://twitter.com/intent/tweet?text=${tweetText}`;
 
-    // Open Victory Modal using native dialog API
     const modal = document.getElementById('victory-modal');
     modal.showModal();
   }
 }
 
 /* ==========================================================================
-   INITIALIZATION & PAGE LOAD
+   INITIALIZATION
    ========================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
   const game = new Game();
@@ -814,7 +767,6 @@ document.addEventListener('DOMContentLoaded', () => {
     game.start();
   });
 
-  // Dialog Restart button
   const restartBtn = document.getElementById('restart-game-btn');
   const modal = document.getElementById('victory-modal');
   restartBtn.addEventListener('click', () => {
@@ -822,24 +774,21 @@ document.addEventListener('DOMContentLoaded', () => {
     game.start();
   });
 
-  // Copy Clipboard Button
   const copyBtn = document.getElementById('copy-btn');
   const copyBtnText = document.getElementById('copy-btn-text');
   const copyTextarea = document.getElementById('copy-text');
 
   copyBtn.addEventListener('click', () => {
     copyTextarea.select();
-    copyTextarea.setSelectionRange(0, 99999); // for mobile devices
+    copyTextarea.setSelectionRange(0, 99999);
     
     navigator.clipboard.writeText(copyTextarea.value).then(() => {
       copyBtnText.textContent = 'Copied! ✅';
-      copyBtn.classList.add('green-pulse');
       setTimeout(() => {
-        copyBtnText.textContent = 'Copy Pitch 📋';
-        copyBtn.classList.remove('green-pulse');
+        copyBtnText.textContent = 'Copy Text 📋';
       }, 2000);
     }).catch(err => {
-      console.error('Failed to copy text: ', err);
+      console.error('Copy failed: ', err);
     });
   });
 });
